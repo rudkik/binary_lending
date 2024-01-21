@@ -27,4 +27,5 @@ Route::get('/setting', [FrontController::class, 'settingPage'])->name('settingPa
 Route::get('/set-webhook', [BotController::class, 'setWebhook']);
 Route::get('/get-webhook', [BotController::class, 'getWebhookInfo']);
 Route::post('/webhook', [BotController::class, 'webhook']);
-Route::post('/signal', [CurrencyController::class, 'signalPost']);
+Route::post('/signal', [CurrencyController::class, 'getCurrencyAmount']);
+Route::get('/signal-data', [CurrencyController::class, 'getTimeFrameData']);

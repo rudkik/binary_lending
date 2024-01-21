@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('/assets/js/chart.js') }}"></script>
     <style>
         body {
             background-color: #0D1117; /* Темный фон */
@@ -13,8 +13,11 @@
         .chart-container {
             position: relative;
             margin: auto;
-            height: 40vh;
-            width: 80vw;
+            height: 90vh;
+            width: 100%;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
         }
         /* Стили для кнопки и других элементов... */
         .button {
@@ -30,60 +33,129 @@
             cursor: pointer;
             border-radius: 25px;
         }
+        .percent{
+            display: none;
+        }
+        .percent .up{
+            color: darkgreen;
+            font-size: 25px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .percent .down{
+            color: darkred;
+            font-size: 25px;
+            font-weight: bold;
+        }
     </style>
     <div class="container setting">
         <h1 class="settings-header">TRADING BOT</h1>
-        <div class="chart-container">
-            <canvas id="forexChart"></canvas>
+
+        <div class="settings-section">
+            <h2>TIMEFRAME</h2>
+            <div class="nav nav-tabs" id="timeframe-tab" role="tablist">
+                <a class="nav-link active" id="timeframe-3min-tab" data-toggle="tab" href="#USD/JPY" role="tab" aria-controls="timeframe-3min" aria-selected="true">USD/JPY</a>
+                <a class="nav-link" id="timeframe-5min-tab" data-toggle="tab" href="#USD/CHF" role="tab" aria-controls="timeframe-5min" aria-selected="false">USD/CHF</a>
+                <a class="nav-link" id="timeframe-5min-tab" data-toggle="tab" href="#USD/CAD" role="tab" aria-controls="timeframe-5min" aria-selected="false">USD/CAD</a>
+                <a class="nav-link" id="timeframe-5min-tab" data-toggle="tab" href="#GBP/USD" role="tab" aria-controls="timeframe-5min" aria-selected="false">GBP/USD</a>
+                <a class="nav-link" id="timeframe-5min-tab" data-toggle="tab" href="#EUR/USD" role="tab" aria-controls="timeframe-5min" aria-selected="false">EUR/USD</a>
+                <a class="nav-link" id="timeframe-5min-tab" data-toggle="tab" href="#AUD/USD" role="tab" aria-controls="timeframe-5min" aria-selected="false">AUD/USD</a>
+           </div>
+            <p style="margin-top:20px; text-align: start">Technical analysis</p>
         </div>
 
-        <button class="button">Start Signals</button>
+
+        <div class="chart-container">
+            <canvas id="forexChart"></canvas>
+            <button class="button" id="start">Start Signals</button>
+            <div class="percent">
+                <div class="up">0%</div>
+                <div class="down">0%</div>
+            </div>
+        </div>
 
         <script>
-            const data = {
-                labels: Object.keys(quotes),
-                datasets: [{
-                    label: 'USD/GBP',
-                    data: Object.values(quotes).map(q => q.USDGBP),
-                    fill: true,
-                    borderColor: '#DFA1ED',
-                    tension: 0.1,
-                    backgroundColor: 'rgba(223, 161, 237, 0.5)' // Полупрозрачный фон под графиком
-                }]
-            };
+            // Функция для получения данных и построения графика
+            document.addEventListener('DOMContentLoaded', function() {
+                let forexChart;
 
-            const config = {
-                type: 'line',
-                data: data,
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            ticks: {
-                                color: 'white' // Цвет текста на осях
-                            }
-                        },
-                        x: {
-                            ticks: {
-                                color: 'white' // Цвет текста на осях
-                            }
+                function fetchDataAndBuildChart(currency, source) {
+                    fetch(`/signal-data?currencies=${currency}&source=${source}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'white' // Цвет легенды
+                    })
+                        .then(response => response.json())
+                        .then(currencyData => {
+                            if (forexChart) {
+                                forexChart.destroy();
                             }
-                        }
-                    }
+
+                            const labels = Object.keys(currencyData.quotes);
+                            const dataPoints = labels.map(label => currencyData.quotes[label][`${source}${currency}`]);
+
+                            const data = {
+                                labels: labels,
+                                datasets: [{
+                                    label: `${currency}/${source}`,
+                                    data: dataPoints,
+                                    fill: true,
+                                    borderColor: '#DFA1ED',
+                                    tension: 0.1,
+                                    backgroundColor: 'rgba(223, 161, 237, 0.5)'
+                                }]
+                            };
+
+                            const config = {
+                                type: 'line',
+                                data: data,
+                                options: { /* options */ }
+                            };
+
+                            forexChart = new Chart(document.getElementById('forexChart').getContext('2d'), config);
+                        })
+                        .catch(error => {
+                            console.error('Ошибка при получении данных:', error);
+                        });
                 }
-            };
 
-            // Инициализация графика
-            const forexChart = new Chart(
-                document.getElementById('forexChart'),
-                config
-            );
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const [currency, source] = e.target.getAttribute('href').substring(1).split('/');
+                        fetchDataAndBuildChart(currency, source);
+                    });
+                });
+
+                fetchDataAndBuildChart('USD', 'JPY'); // Загрузка начальных данных
+            });
+        </script>
+
+
+
+        <script>
+            function updatePercentages() {
+                // Assuming up and down are percentage values that should total 100
+                let up = Math.random() * 30; // Random delta up to 10%
+                let down = 100 - up; // Ensuring the sum is 100%
+
+                // Update the UI elements with new values
+                document.querySelector('.percent .up').textContent = 'UP '+ up.toFixed(1) + '%';
+                document.querySelector('.percent .down').textContent = 'DOWN '+ down.toFixed(1) + '%';
+            }
+
+
+            setInterval(updatePercentages, 10000);
+
+            // Initial update
+            updatePercentages();
+
+            // Add event listener to the start button if needed
+            document.getElementById('start').addEventListener('click', function() {
+                document.querySelector('.percent').style.display = 'flex';
+            });
         </script>
     </div>
 @endsection

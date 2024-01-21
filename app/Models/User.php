@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    public function createUser($data){
+        User::create([
+            'name' => $data['chat']['first_name'],
+            'chat_id' => $data['chat']['id'],
+            'is_active' => 0,
+        ]);
+    }
 }
