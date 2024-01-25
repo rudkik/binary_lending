@@ -22,10 +22,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontController::class, 'mainPage'])->name('mainPage');
 Route::get('/currency', [FrontController::class, 'currencyPage'])->name('currencyPage');
 Route::get('/setting', [FrontController::class, 'settingPage'])->name('settingPage');
+Route::get('/check-uid', [FrontController::class, 'checkUid'])->name('checkUid');
 
 
 Route::get('/set-webhook', [BotController::class, 'setWebhook']);
 Route::get('/get-webhook', [BotController::class, 'getWebhookInfo']);
 Route::post('/webhook', [BotController::class, 'webhook']);
-Route::post('/signal', [CurrencyController::class, 'getCurrencyAmount']);
-Route::get('/signal-data', [CurrencyController::class, 'getTimeFrameData']);
+
+Route::get('/signal-data2', [\App\Http\Controllers\PolygonController::class, 'getSimpleMovingAverage']);
+Route::get('/check-register', [\App\Http\Controllers\PocketController::class, 'checkRegisterWindow']);

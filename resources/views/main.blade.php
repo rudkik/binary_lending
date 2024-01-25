@@ -48,12 +48,10 @@
                 <div class="modal-body">
                     <img src="/assets/img/logo.svg">
                     <p>If you have already registered, check your account for activity</p>
-                    <form action="">
+                    <form action="{{ route('checkUid') }}" method="GET">
                         <button type="submit"></button>
-                        <input class="form-control" placeholder="Enter your UID">
-
+                        <input class="form-control" name="uid" placeholder="Enter your UID">
                     </form>
-
                 </div>
 
 

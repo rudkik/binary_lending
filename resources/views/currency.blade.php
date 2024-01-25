@@ -80,7 +80,7 @@
                 let forexChart;
 
                 function fetchDataAndBuildChart(currency, source) {
-                    fetch(`/signal-data?currencies=${currency}&source=${source}`, {
+                    fetch(`/signal-data2?currencies=${currency}&source=${source}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -88,15 +88,18 @@
                         }
                     })
                         .then(response => response.json())
-                        .then(currencyData => {
+                        .then(data => {
                             if (forexChart) {
                                 forexChart.destroy();
                             }
 
-                            const labels = Object.keys(currencyData.quotes);
-                            const dataPoints = labels.map(label => currencyData.quotes[label][`${source}${currency}`]);
+                            // Переворачиваем массив данных
+                            const reversedData = data.results.values.reverse();
+                            // Преобразование данных для графика
+                            const labels = reversedData.map(item => new Date(item.timestamp).toLocaleDateString("en-US"));
+                            const dataPoints = reversedData.map(item => item.value);
 
-                            const data = {
+                            const chartData = {
                                 labels: labels,
                                 datasets: [{
                                     label: `${currency}/${source}`,
@@ -110,7 +113,7 @@
 
                             const config = {
                                 type: 'line',
-                                data: data,
+                                data: chartData,
                                 options: { /* options */ }
                             };
 
@@ -121,11 +124,13 @@
                         });
                 }
 
+
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.addEventListener('click', function(e) {
                         e.preventDefault();
                         const [currency, source] = e.target.getAttribute('href').substring(1).split('/');
                         fetchDataAndBuildChart(currency, source);
+                        updatePercentages();
                     });
                 });
 
@@ -138,8 +143,8 @@
         <script>
             function updatePercentages() {
                 // Assuming up and down are percentage values that should total 100
-                let up = Math.random() * 30; // Random delta up to 10%
-                let down = 100 - up; // Ensuring the sum is 100%
+                let down = Math.random() * 30; // Random delta up to 10%
+                let up = 100 - down; // Ensuring the sum is 100%
 
                 // Update the UI elements with new values
                 document.querySelector('.percent .up').textContent = 'UP '+ up.toFixed(1) + '%';

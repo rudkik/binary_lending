@@ -15,6 +15,22 @@
 
 
     @yield('content')
+    <!-- Кнопка для открытия модального окна -->
+    <button type="button" class="btn btn-primary contacts" data-toggle="modal" data-target="#contactModal">
+        <img src="/assets/img/contacts.svg" alt="">
+    </button>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content" style="padding:50px 20px;">
+                <div class="modal-body">
+                    <p>Contacts</p>
+                    <a href="https://t.me/caelysp" class="btn btn-info">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </body>
     <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>

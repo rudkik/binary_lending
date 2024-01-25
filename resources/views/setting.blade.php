@@ -35,9 +35,9 @@
 
         <div class="settings-section" style="display:flex; align-items: center; flex-direction: column">
             <p>Select the parameters based on which the signal will be received</p>
-            <button class="btn btn-next">
+            <a href="{{ route('currencyPage') }}" class="btn btn-next">
                 Next
-            </button>
+            </a>
         </div>
     </div>
 @endsection
