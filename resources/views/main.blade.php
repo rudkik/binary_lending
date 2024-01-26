@@ -71,23 +71,21 @@
                     const messageContainer = document.getElementById('messageContainer');
                     messageContainer.innerHTML = '';
 
-                    if (data.dpst > 50) {
-                        // Пользователь подходит
+                    if (data.dpst === false) {
+                        // Пользователь не зарегистрирован, показываем ссылку на регистрацию
+                        messageContainer.innerHTML = `
+        <p>You are not registered, please register using the link below.</p>
+        <a class="btn btn-success" href="https://po8.cash/register?utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Register</a>
+    `;
+                    } else if (data.dpst < 50) {
+                        // У пользователя недостаточно депозита, показываем ссылку на депозит
+                        messageContainer.innerHTML = `
+        <p>Your deposit is less than the required amount, please deposit using the link below.</p>
+        <a class="btn btn-success" href="https://po8.cash/cabinet/demo-high-low/?try-demo=1&redirectUrl=cabinet/deposit-step-1&utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Deposit</a>
+    `;
+                    } else if (data.dpst > 50) {
+                        // Пользователь подходит, перенаправляем на страницу настроек
                         window.location.href = '{{ route('settingPage') }}';
-                    }
-                    if(data.dpst == false){
-                        // Пользователь не подходит, показываем ссылки
-                        messageContainer.innerHTML = `
-                        <p>You are not register,please register on link</p>
-                        <a class="btn btn-success" href="https://po8.cash/register?utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Register</a>
-                            `;
-                    }
-                    if(data.dpst < 50){
-                        messageContainer.innerHTML = `
-                        <p>You are not deposit,please deposit on link</p>
-                        <a class="btn btn-success" href="https://po8.cash/cabinet/demo-high-low/?try-demo=1&redirectUrl=cabinet/deposit-step-1&utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Deposit</a>
-                            `;
-
                     }
                 })
                 .catch(error => console.error('Ошибка:', error));
