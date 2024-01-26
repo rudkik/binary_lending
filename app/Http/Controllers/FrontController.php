@@ -41,12 +41,7 @@ class FrontController extends Controller
 
         $data_user = PocketController::checkRegistr($uid);
 
-        if ($data_user['dpst'] > 50){
-            return redirect()->route('settingPage');
-        }
-
-        return redirect()->route('mainPage');
-
+        return response()->json(['dpst' => $data_user['dpst']]);
     }
 
 }

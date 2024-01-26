@@ -24,6 +24,25 @@
                 <a class="nav-link" id="analysis-signal-tab" data-toggle="tab" href="#analysis-signal" role="tab" aria-controls="analysis-signal" aria-selected="false">Signal trends</a>
                 <a class="nav-link" id="analysis-resistance-tab" data-toggle="tab" href="#analysis-resistance" role="tab" aria-controls="analysis-resistance" aria-selected="false">Resistance level</a>
             </div>
+
+            <div class="tab-content" style="margin-top: 20px">
+                <div class="tab-pane fade show active" id="analysis-technical">
+
+                    <a>Advantage: Provides structured insights into historical price movements.</a>
+                    <a>Profit Potential: Depends on accurate chart patterns and indicator interpretation.</a>
+                </div>
+                <div class="tab-pane fade" id="analysis-signal">
+
+                    <a>Advantage: Leverages market momentum by identifying and following trends.</a>
+                    <a>Profit Potential: Higher probability of success by trading with established trends.</a>
+                </div>
+                <div class="tab-pane fade" id="analysis-resistance">
+
+                    <a>Advantage: Recognizes potential price still or reversal points.</a>
+                    <a>Profit Potential: Effective for managing risk and benefiting from trend reversal.</a>
+                </div>
+            </div>
+
         </div>
 
         <div class="settings-section">

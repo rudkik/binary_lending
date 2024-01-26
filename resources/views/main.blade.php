@@ -48,14 +48,50 @@
                 <div class="modal-body">
                     <img src="/assets/img/logo.svg">
                     <p>If you have already registered, check your account for activity</p>
-                    <form action="{{ route('checkUid') }}" method="GET">
+                    <form id="uidForm" method="GET">
                         <button type="submit"></button>
                         <input class="form-control" name="uid" placeholder="Enter your UID">
                     </form>
+                    <div id="messageContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px"></div>
                 </div>
 
 
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('uidForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const uid = event.target.uid.value;
+            fetch(`{{ route('checkUid') }}?uid=${uid}`)
+                .then(response => response.json())
+                .then(data => {
+                    const messageContainer = document.getElementById('messageContainer');
+                    messageContainer.innerHTML = '';
+
+                    if (data.dpst > 50) {
+                        // Пользователь подходит
+                        window.location.href = '{{ route('settingPage') }}';
+                    }
+                    if(data.dpst == false){
+                        // Пользователь не подходит, показываем ссылки
+                        messageContainer.innerHTML = `
+                        <p>You are not register,please register on link</p>
+                        <a class="btn btn-success" href="https://po8.cash/register?utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Register</a>
+                            `;
+                    }
+                    if(data.dpst < 50){
+                        messageContainer.innerHTML = `
+                        <p>You are not deposit,please deposit on link</p>
+                        <a class="btn btn-success" href="https://po8.cash/cabinet/demo-high-low/?try-demo=1&redirectUrl=cabinet/deposit-step-1&utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Deposit</a>
+                            `;
+
+                    }
+                })
+                .catch(error => console.error('Ошибка:', error));
+        });
+
+    </script>
 @endsection

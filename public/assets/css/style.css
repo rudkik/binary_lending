@@ -259,10 +259,10 @@ body {
 .nav-tabs{
     border-bottom: none!important;
 }
-.nav-tabs .nav-link {
+.nav-tabs .nav-link, .tab-content a {
     background: none!important;
     border: none!important;
-    color: white;
+    color: white!important;
     font-weight: 700;
     margin-right: 8px;
     padding: 0;
