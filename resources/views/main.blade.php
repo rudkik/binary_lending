@@ -3,11 +3,11 @@
 
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-5" style="padding-bottom: 30px">
         <div class="row">
             <div class="col-12">
-                <p class="sub-heading">New: Our AI integration just landed</p>
-                <h1 class="main-heading">Discover endless possibilities in the world of Trading.</h1>
+                <p class="sub-heading">{{ __('site.sub_heading') }}</p>
+                <h1 class="main-heading">{{ __('site.main_heading') }}</h1>
 
             </div>
         </div>
@@ -16,27 +16,30 @@
         <div class="row">
             <div class="col-12">
                 <div class="video">
-
+                    <video id="myVideo" width="100%" height="auto" controls autoplay loop>
+                        <source src="/assets/video/video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </div>
         <div class="row">
                 <div class="info-box">
-                   <p class="first">Profitable signals</p>
+                   <p class="first">{{ __('site.advantage1') }}</p>
                 </div>
                 <div class="info-box">
-                   <p class="second">Real-time trading</p>
+                   <p class="second">{{ __('site.advantage2') }}</p>
                 </div>
                 <div class="info-box">
-                   <p class="third">Constant updating of signals</p>
+                   <p class="third">{{ __('site.advantage3') }}</p>
                 </div>
         </div>
 
         <!-- Кнопки -->
         <div class="" style="display: flex; justify-content: center; margin-bottom: 150px">
 
-                <button class="btn2 btn-custom-start" data-toggle="modal" data-target="#uidModal">Start trading now</button>
-                <button class="btn2 btn-custom-uid" data-toggle="modal" data-target="#uidModal">Check UID</button>
+                <button class="btn2 btn-custom-start" data-toggle="modal" data-target="#uidModal">{{ __('site.start') }}</button>
+                <button class="btn2 btn-custom-uid" data-toggle="modal" data-target="#uidModal">{{ __('site.check') }}</button>
         </div>
     </div>
 
@@ -91,5 +94,14 @@
                 .catch(error => console.error('Ошибка:', error));
         });
 
+        document.addEventListener("DOMContentLoaded", function() {
+            var video = document.getElementById('myVideo');
+
+            video.addEventListener('loadeddata', function() {
+                if (video.readyState >= 3) { // проверяем, достаточно ли данных загружено
+                    video.play();
+                }
+            });
+        });
     </script>
 @endsection

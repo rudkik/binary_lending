@@ -7,7 +7,7 @@
         <h1 class="settings-header">TRADING BOT</h1>
 
         <div class="settings-section">
-            <h2>TIMEFRAME</h2>
+            <h2>{{ __('site.timeframe') }}</h2>
             <div class="nav nav-tabs" id="timeframe-tab" role="tablist">
                 <a class="nav-link active" id="timeframe-3min-tab" data-toggle="tab" href="#timeframe-3min" role="tab" aria-controls="timeframe-3min" aria-selected="true">3 min</a>
                 <a class="nav-link" id="timeframe-5min-tab" data-toggle="tab" href="#timeframe-5min" role="tab" aria-controls="timeframe-5min" aria-selected="false">5 min</a>
@@ -18,28 +18,22 @@
         </div>
 
         <div class="settings-section underline">
-            <h2>TYPE OF ANALYSIS</h2>
+            <h2>{{ __('site.type_analise') }}</h2>
             <div class="nav nav-tabs" id="analysis-tab" role="tablist">
-                <a class="nav-link active" id="analysis-technical-tab" data-toggle="tab" href="#analysis-technical" role="tab" aria-controls="analysis-technical" aria-selected="true">Technical analysis</a>
-                <a class="nav-link" id="analysis-signal-tab" data-toggle="tab" href="#analysis-signal" role="tab" aria-controls="analysis-signal" aria-selected="false">Signal trends</a>
-                <a class="nav-link" id="analysis-resistance-tab" data-toggle="tab" href="#analysis-resistance" role="tab" aria-controls="analysis-resistance" aria-selected="false">Resistance level</a>
+                <a class="nav-link active" id="analysis-technical-tab" data-toggle="tab" href="#analysis-technical" role="tab" aria-controls="analysis-technical" aria-selected="true">{{ __('site.technical') }}</a>
+                <a class="nav-link" id="analysis-signal-tab" data-toggle="tab" href="#analysis-signal" role="tab" aria-controls="analysis-signal" aria-selected="false">{{ __('site.trends') }}</a>
+                <a class="nav-link" id="analysis-resistance-tab" data-toggle="tab" href="#analysis-resistance" role="tab" aria-controls="analysis-resistance" aria-selected="false">{{ __('site.resistance') }}</a>
             </div>
 
             <div class="tab-content" style="margin-top: 20px">
                 <div class="tab-pane fade show active" id="analysis-technical">
-
-                    <a>Advantage: Provides structured insights into historical price movements.</a>
-                    <a>Profit Potential: Depends on accurate chart patterns and indicator interpretation.</a>
+                    {!! __('site.technical_text') !!}
                 </div>
                 <div class="tab-pane fade" id="analysis-signal">
-
-                    <a>Advantage: Leverages market momentum by identifying and following trends.</a>
-                    <a>Profit Potential: Higher probability of success by trading with established trends.</a>
+                    {!! __('site.trends_text') !!}
                 </div>
                 <div class="tab-pane fade" id="analysis-resistance">
-
-                    <a>Advantage: Recognizes potential price still or reversal points.</a>
-                    <a>Profit Potential: Effective for managing risk and benefiting from trend reversal.</a>
+                    {!! __('site.resistance_text') !!}
                 </div>
             </div>
 
@@ -47,15 +41,15 @@
 
         <div class="settings-section">
             <ul>
-                <li>Signal throughput 85%</li>
-                <li>Open a deal with a broker as soon as you receive a signal</li>
+                <li>{{ __('site.signal') }}</li>
+                <li>{{ __('site.open') }}</li>
             </ul>
         </div>
 
         <div class="settings-section" style="display:flex; align-items: center; flex-direction: column">
-            <p>Select the parameters based on which the signal will be received</p>
+            <p>{{ __('site.select') }}</p>
             <a href="{{ route('currencyPage') }}" class="btn btn-next">
-                Next
+                {{ __('site.next') }}
             </a>
         </div>
     </div>

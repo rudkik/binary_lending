@@ -43,5 +43,11 @@ class FrontController extends Controller
 
         return response()->json(['dpst' => $data_user['dpst']]);
     }
+    public function checkToken(Request $request){
+        $uid = $request->uid;
+
+        dd(PocketController::extractLaravelSession($uid));
+
+    }
 
 }

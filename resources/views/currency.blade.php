@@ -67,7 +67,7 @@
 
         <div class="chart-container">
             <canvas id="forexChart"></canvas>
-            <button class="button" id="start">Start Signals</button>
+            <button class="button" id="start">{{ __('site.start_signal') }}</button>
             <div class="percent">
                 <div class="up">0%</div>
                 <div class="down">0%</div>

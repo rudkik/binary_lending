@@ -155,9 +155,9 @@ body {
 }
 
 .modal-content{
-    background-color: rgba(87, 83, 83, 0.17)!important;
+    background-color: rgba(87, 83, 83, 1)!important;
     width: 364px!important;
-    backdrop-filter: blur(36px);
+
     background: linear-gradient(82deg, #5753532B 38.7%, #FF2CDF 115.51%);
     padding: 150px 20px 50px 20px;
     border-radius: 25px!important;
@@ -319,8 +319,8 @@ body {
         background: linear-gradient(30deg, #1D1B32 38.7%, #FF2CDF 115.51%);
     }
     .navbar-brand{
-        margin-right: 0!important;
-        margin-left: auto;
+
+
     }
     .navbar-brand img{
         height: 50px;
