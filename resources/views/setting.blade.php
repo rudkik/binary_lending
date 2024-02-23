@@ -46,7 +46,7 @@
             </ul>
         </div>
 
-        <div class="settings-section" style="display:flex; align-items: center; flex-direction: column">
+        <div class="settings-section" style="display:flex; align-items: center; flex-direction: column; margin-bottom: 40px">
             <p>{{ __('site.select') }}</p>
             <a href="{{ route('currencyPage') }}" class="btn btn-next">
                 {{ __('site.next') }}

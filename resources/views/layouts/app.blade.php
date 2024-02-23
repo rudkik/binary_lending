@@ -16,8 +16,8 @@
 
     @yield('content')
     <!-- Кнопка для открытия модального окна -->
-    <button type="button" class="btn btn-primary contacts" data-toggle="modal" data-target="#contactModal">
-        <img src="/assets/img/contacts.svg" alt="">
+    <button type="button" class="btn btn-success contacts" data-toggle="modal" data-target="#contactModal">
+        <img src="/assets/img/ebalo.png" alt="">
     </button>
 
     <!-- Модальное окно -->
@@ -26,7 +26,8 @@
             <div class="modal-content" style="padding:50px 20px;">
                 <div class="modal-body">
                     <p>Contacts</p>
-                    <a href="https://t.me/caelysp" class="btn btn-info">Telegram</a>
+                    <a style="margin-bottom: 10px" href="https://t.me/caelysp" class="btn btn-info">Telegram</a>
+                    <a href="https://wa.me/message/GCQXTLJPLCRGH1" class="btn btn-success">Whatsapp</a>
                 </div>
             </div>
         </div>

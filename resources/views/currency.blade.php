@@ -37,13 +37,13 @@
             display: none;
         }
         .percent .up{
-            color: darkgreen;
+            color: green;
             font-size: 25px;
             font-weight: bold;
             margin-right: 20px;
         }
         .percent .down{
-            color: darkred;
+            color: red;
             font-size: 25px;
             font-weight: bold;
         }
@@ -69,8 +69,8 @@
             <canvas id="forexChart"></canvas>
             <button class="button" id="start">{{ __('site.start_signal') }}</button>
             <div class="percent">
-                <div class="up">0%</div>
-                <div class="down">0%</div>
+                <div class="up">0% <img src="" alt="/assets/img/green.png"></div>
+                <div class="down">0% <img src="" alt="/assets/img/red.png"></div>
             </div>
         </div>
 
@@ -146,9 +146,12 @@
                 let down = Math.random() * 30; // Random delta up to 10%
                 let up = 100 - down; // Ensuring the sum is 100%
 
-                // Update the UI elements with new values
-                document.querySelector('.percent .up').textContent = 'UP '+ up.toFixed(1) + '%';
-                document.querySelector('.percent .down').textContent = 'DOWN '+ down.toFixed(1) + '%';
+                let upHTML = `UP ${up.toFixed(1)}% <img src="/assets/img/green.png" alt="Green Arrow">`;
+                let downHTML = `DOWN ${down.toFixed(1)}% <img src="/assets/img/red.png" alt="Red Arrow">`;
+
+                // Update the UI elements with new values and images
+                document.querySelector('.percent .up').innerHTML = upHTML;
+                document.querySelector('.percent .down').innerHTML = downHTML;;
             }
 
 
