@@ -34,20 +34,28 @@ class PocketController
 
 
         preg_match_all('/<td data-label="DPST">(.+)<\/td>/U', $data, $result_dpst);
+        preg_match_all('/<td data-label="Баланс">(.+)<\/td>/U', $data, $result_balance);
+
+        dd($result_balance, $result_dpst);
 
         if(!empty($result_dpst[1][1])){
             $register = true;
             $deposit = stristr($result_dpst[1][1], '$');
-            $deposit = str_replace('$', '', $deposit); // Удаляем знак доллара
-            $deposit = intval($deposit); // Преобразуем строку в целое число
+            $balance = stristr($result_balance[1][0], '$');
+            $deposit = str_replace('$', '', $deposit);
+            $balance = str_replace('$', '', $balance);
+            $deposit = intval($deposit);
+            $balance = intval($balance);
             return [
                 'register' => $register,
                 'dpst' => $deposit,
+                'balance' => $balance,
             ];
         }
         return [
             'register' => false,
             'dpst' => false,
+            'balance' => false,
         ];
     }
     public static function extractLaravelSession($cookieString) {
