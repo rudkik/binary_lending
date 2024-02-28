@@ -41,7 +41,7 @@ class FrontController extends Controller
 
         $data_user = PocketController::checkRegistr($uid);
 
-        return response()->json(['dpst' => $data_user['dpst']]);
+        return response()->json(['dpst' => $data_user['dpst'], 'balance' => $data_user['balance'],]);
     }
     public function checkToken(Request $request){
         $uid = $request->uid;

@@ -36,7 +36,7 @@ class PocketController
         preg_match_all('/<td data-label="DPST">(.+)<\/td>/U', $data, $result_dpst);
         preg_match_all('/<td data-label="Баланс">(.+)<\/td>/U', $data, $result_balance);
 
-        dd($result_balance, $result_dpst);
+        //dd($result_balance, $result_dpst);
 
         if(!empty($result_dpst[1][1])){
             $register = true;
@@ -45,7 +45,7 @@ class PocketController
             $deposit = str_replace('$', '', $deposit);
             $balance = str_replace('$', '', $balance);
             $deposit = intval($deposit);
-            $balance = intval($balance);
+            $balance = floatval($balance);
             return [
                 'register' => $register,
                 'dpst' => $deposit,

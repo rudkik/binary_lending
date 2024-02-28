@@ -26,8 +26,8 @@
             <div class="modal-content" style="padding:50px 20px;">
                 <div class="modal-body">
                     <p>Contacts</p>
-                    <a style="margin-bottom: 10px" href="https://t.me/caelysp" class="btn btn-info">Telegram</a>
-                    <a href="https://wa.me/message/GCQXTLJPLCRGH1" class="btn btn-success">Whatsapp</a>
+                    <a style="margin-bottom: 10px" href="https://t.me/ph_supp" class="btn btn-info">Telegram</a>
+                    <a href="https://whatsapp.com/channel/0029VaJiyyl42DcaJqlWnx0N" class="btn btn-success">Whatsapp</a>
                 </div>
             </div>
         </div>
