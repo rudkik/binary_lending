@@ -28,5 +28,7 @@ return [
     'next' => 'Siguiente',
     'start_signal' => 'Señales de inicio',
     'register' => 'Regístrese en',
+    'register_еуче' => 'Usted no está registrado, por favor regístrese utilizando el enlace de abajo.',
+    'deposit_text' => 'Su depósito es inferior a la cantidad requerida, por favor deposite utilizando el enlace de abajo.',
 
 ];

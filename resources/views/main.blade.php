@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="video">
                     <video id="myVideo" width="100%" height="auto" controls autoplay loop>
-                        <source src="/assets/video/video.mp4" type="video/mp4">
+                        <source src="/assets/video/video_{{ LaravelLocalization::getCurrentLocale() }}.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -64,6 +64,8 @@
     </div>
 
     <script>
+        var registet = '{{ __('site.register_text') }}';
+        var depost = '{{ __('site.deposit_text') }}';
         document.getElementById('uidForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -77,13 +79,13 @@
                     if (data.dpst === false) {
                         // Пользователь не зарегистрирован, показываем ссылку на регистрацию
                         messageContainer.innerHTML = `
-        <p>You are not registered, please register using the link below.</p>
+        <p>${registet}</p>
         <a class="btn btn-success" href="https://po8.cash/register?utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Register</a>
     `;
                     } else if (data.balance < 30) {
                         // У пользователя недостаточно депозита, показываем ссылку на депозит
                         messageContainer.innerHTML = `
-        <p>Your deposit is less than the required amount, please deposit using the link below.</p>
+        <p>${depost}</p>
         <a class="btn btn-success" href="https://po8.cash/cabinet/demo-high-low/?try-demo=1&redirectUrl=cabinet/deposit-step-1&utm_source=affiliate&a=7dWuLjF1iNh2H0&ac=po_signals&code=50START">Deposit</a>
     `;
                     } else if (data.balance > 30) {

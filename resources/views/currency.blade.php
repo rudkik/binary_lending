@@ -143,7 +143,7 @@
         <script>
             function updatePercentages() {
                 // Assuming up and down are percentage values that should total 100
-                let down = Math.random() * 80; // Random delta up to 10%
+                let down = Math.random() * 55; // Random delta up to 10%
                 let up = 100 - down; // Ensuring the sum is 100%
 
                 let upHTML = `UP ${up.toFixed(1)}% <img src="/assets/img/green.png" alt="Green Arrow">`;

@@ -28,6 +28,7 @@ return [
     'next' => 'Próximo',
     'start_signal' => 'Sinais de início',
     'register' => 'Registro',
-
+    'register_text' => 'Não está registado, por favor registe-se utilizando a ligação abaixo.',
+    'deposit_text' => 'Your deposit is less than the required amount, please deposit using the link below.',
 ];
 

@@ -28,5 +28,7 @@ return [
     'next' => 'Next',
     'start_signal' => 'Start Signals',
     'register' => 'Register',
+    'register_text' => 'You are not registered, please register using the link below.',
+    'deposit_text' => 'Your deposit is less than the required amount, please deposit using the link below.',
 
 ];
